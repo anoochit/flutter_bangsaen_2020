@@ -1,0 +1,41 @@
+### GET /
+
+GET http://127.0.0.1:3000
+
+### GET Todos
+
+GET http://127.0.0.1:3000/todos
+
+
+### DELETE Todos
+
+DELETE http://127.0.0.1:3000/todos
+
+### GET Complete Todo
+ 
+GET http://127.0.0.1:3000/complete
+
+### POST Todo
+ 
+POST http://127.0.0.1:3000/todos
+content-type: application/json
+
+{
+    "title": "sample",
+    "complete": false
+}
+
+### GET Todo
+
+GET http://127.0.0.1:3000/todos/1f6ead80-11d7-11eb-9eea-f77b85e23c63
+
+
+### PUT Todo
+ 
+PUT http://127.0.0.1:3000/todos/1f6ead80-11d7-11eb-9eea-f77b85e23c63
+content-type: application/json
+
+{
+    "title": "sample",
+    "complete": true
+}
