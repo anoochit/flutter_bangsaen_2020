@@ -4,7 +4,7 @@ import 'package:retrofit_request/models/todo.dart';
 
 part 'todo_service.g.dart';
 
-@RestApi(baseUrl: 'http://f8a57044f71e.ngrok.io')
+@RestApi(baseUrl: 'http://a11df340fa67.ngrok.io')
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 

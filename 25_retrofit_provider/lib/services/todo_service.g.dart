@@ -9,7 +9,7 @@ part of 'todo_service.dart';
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    baseUrl ??= 'http://f8a57044f71e.ngrok.io';
+    baseUrl ??= 'http://a11df340fa67.ngrok.io';
   }
 
   final Dio _dio;
@@ -24,14 +24,9 @@ class _RestClient implements RestClient {
     final _result = await _dio.request<List<dynamic>>('/todos',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'GET',
-            headers: <String, dynamic>{},
-            extra: _extra,
-            baseUrl: baseUrl),
+            method: 'GET', headers: <String, dynamic>{}, extra: _extra, baseUrl: baseUrl),
         data: _data);
-    var value = _result.data
-        .map((dynamic i) => Todo.fromJson(i as Map<String, dynamic>))
-        .toList();
+    var value = _result.data.map((dynamic i) => Todo.fromJson(i as Map<String, dynamic>)).toList();
     return value;
   }
 
@@ -44,10 +39,7 @@ class _RestClient implements RestClient {
     final _result = await _dio.request<Map<String, dynamic>>('/todos/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'GET',
-            headers: <String, dynamic>{},
-            extra: _extra,
-            baseUrl: baseUrl),
+            method: 'GET', headers: <String, dynamic>{}, extra: _extra, baseUrl: baseUrl),
         data: _data);
     final value = Todo.fromJson(_result.data);
     return value;
@@ -65,10 +57,7 @@ class _RestClient implements RestClient {
     final _result = await _dio.request<Map<String, dynamic>>('/todos/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'PUT',
-            headers: <String, dynamic>{},
-            extra: _extra,
-            baseUrl: baseUrl),
+            method: 'PUT', headers: <String, dynamic>{}, extra: _extra, baseUrl: baseUrl),
         data: _data);
     final value = Todo.fromJson(_result.data);
     return value;
@@ -85,10 +74,7 @@ class _RestClient implements RestClient {
     final _result = await _dio.request<String>('/todos',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'POST',
-            headers: <String, dynamic>{},
-            extra: _extra,
-            baseUrl: baseUrl),
+            method: 'POST', headers: <String, dynamic>{}, extra: _extra, baseUrl: baseUrl),
         data: _data);
     final value = _result.data;
     return value;
