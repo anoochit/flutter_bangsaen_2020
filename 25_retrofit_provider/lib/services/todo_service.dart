@@ -15,5 +15,8 @@ abstract class RestClient {
   Future<Todo> getTodo(@Path("id") String id);
 
   @PUT("/todos/{id}")
-  Future<Todo> editTodo(@Path("id") String id);
+  Future<Todo> updateTodo(@Path() String id, @Body() Todo todo);
+
+  @POST("/todos")
+  Future<String> postFormData(@Body() Todo todo);
 }

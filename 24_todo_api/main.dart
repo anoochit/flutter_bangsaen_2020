@@ -7,10 +7,12 @@ import 'server.dart';
 import 'database/database.dart';
 
 void main() async {
-  // init hive
   Hive
     ..init(Directory.current.path)
     ..registerAdapter(TodoAdapter());
+
+  var box = await Hive.openBox('todo');
+  box.clear();
 
   var hot = HotReloader(createServer, [
     'server.dart',

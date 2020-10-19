@@ -54,11 +54,14 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Todo> editTodo(id) async {
+  Future<Todo> updateTodo(id, todo) async {
     ArgumentError.checkNotNull(id, 'id');
+    ArgumentError.checkNotNull(todo, 'todo');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(todo?.toJson() ?? <String, dynamic>{});
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/todos/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -68,6 +71,26 @@ class _RestClient implements RestClient {
             baseUrl: baseUrl),
         data: _data);
     final value = Todo.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<String> postFormData(todo) async {
+    ArgumentError.checkNotNull(todo, 'todo');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(todo?.toJson() ?? <String, dynamic>{});
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<String>('/todos',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = _result.data;
     return value;
   }
 }
