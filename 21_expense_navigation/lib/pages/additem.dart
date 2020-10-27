@@ -9,7 +9,7 @@ class AddItemPage extends StatefulWidget {
 
 class _AddItemPageState extends State<AddItemPage> {
   int _currentTabIndex = 0;
-  int _currentOption = null;
+  int _currentOption = 0;
 
   List<String> _expenseGridText = [
     "Food",

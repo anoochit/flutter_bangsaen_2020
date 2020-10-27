@@ -69,6 +69,9 @@ class _HomePageState extends State<HomePage> {
                 //border: OutlineInputBorder(),
                 hintText: 'Type your task here !!',
               ),
+              onFieldSubmitted: (value) {
+                database.addTodo(Todo(id: null, title: "Hello"));
+              },
             ),
           ],
         ),
