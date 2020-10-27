@@ -12,17 +12,13 @@ class IncomePage extends StatefulWidget {
 class _IncomePageState extends State<IncomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Income"),
-        elevation: 0.0,
-      ),
-      body: Column(
+    return Container(
+      child: Column(
         children: [
           SizedBox(height: 16.0),
           MonthMenu(),
           SizedBox(height: 16.0),
-          SummaryChart(),
+          SummaryChart(title: "Income"),
           SizedBox(height: 16.0),
           Expanded(
             child: Container(),

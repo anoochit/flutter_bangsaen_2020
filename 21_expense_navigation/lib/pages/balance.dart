@@ -12,23 +12,17 @@ class BalancePage extends StatefulWidget {
 class _BalancePageState extends State<BalancePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Balance"),
-        elevation: 0.0,
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 16.0),
-          MonthMenu(),
-          SizedBox(height: 16.0),
-          SummaryChart(),
-          SizedBox(height: 16.0),
-          Expanded(
-            child: Container(),
-          )
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(height: 16.0),
+        MonthMenu(),
+        SizedBox(height: 16.0),
+        SummaryChart(title: "Balance"),
+        SizedBox(height: 16.0),
+        Expanded(
+          child: Container(),
+        )
+      ],
     );
   }
 }

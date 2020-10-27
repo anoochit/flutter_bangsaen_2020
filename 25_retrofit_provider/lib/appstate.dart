@@ -10,9 +10,11 @@ class AppState with ChangeNotifier {
 
   List<Todo> listTodo = [];
 
+  String endPoint = "http://da2923d5bf63.ngrok.io";
+
   getTodoList() async {
     Dio dio = Dio();
-    listTodo = await RestClient(dio).getTodos();
+    listTodo = await RestClient(dio, baseUrl: endPoint).getTodos();
     notifyListeners();
   }
 
@@ -20,7 +22,7 @@ class AppState with ChangeNotifier {
     Dio dio = Dio();
     var newtodo = todo;
     newtodo.complete = !todo.complete;
-    await RestClient(dio).updateTodo(todo.id, newtodo);
+    await RestClient(dio, baseUrl: endPoint).updateTodo(todo.id, newtodo);
     notifyListeners();
   }
 }

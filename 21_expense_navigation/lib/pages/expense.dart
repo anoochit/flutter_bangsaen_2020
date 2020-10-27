@@ -12,23 +12,17 @@ class ExpensePage extends StatefulWidget {
 class _ExpensePageState extends State<ExpensePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Expenses"),
-        elevation: 0.0,
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 16.0),
-          MonthMenu(),
-          SizedBox(height: 16.0),
-          SummaryChart(),
-          SizedBox(height: 16.0),
-          Expanded(
-            child: Container(),
-          )
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(height: 16.0),
+        MonthMenu(),
+        SizedBox(height: 16.0),
+        SummaryChart(title: "Expenses"),
+        SizedBox(height: 16.0),
+        Expanded(
+          child: Container(),
+        )
+      ],
     );
   }
 }

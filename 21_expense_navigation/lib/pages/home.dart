@@ -1,6 +1,10 @@
-import 'package:expense_navigation/widget/monthpicker.dart';
-import 'package:expense_navigation/widget/overall_list_item.dart';
-import 'package:expense_navigation/widget/overallbox.dart';
+import 'package:expense_navigation/pages/additem.dart';
+import 'package:expense_navigation/pages/balance.dart';
+import 'package:expense_navigation/pages/expense.dart';
+import 'package:expense_navigation/pages/income.dart';
+import 'package:expense_navigation/pages/profile.dart';
+import 'package:expense_navigation/pages/summary.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   // bottom navigation index
   int _currentIndex = 0;
 
+  // menu icon
   List<IconData> _menuIcon = [
     Icons.dashboard,
     Icons.local_dining,
@@ -22,28 +27,56 @@ class _HomePageState extends State<HomePage> {
     Icons.exit_to_app
   ];
 
+  // list text menu
   List<String> _menuText = ["Dashboard", "Expenses", "Income", "Balance", "Sign Out"];
+
+  // list bottom menu text
+  List<String> _bottomMenuText = ["Dashboard", "Expenses", "Income", "Balance", "Account"];
+
+  // list bottom menu icon
+  List<IconData> _bottomMenuIcon = [
+    Icons.dashboard,
+    Icons.local_dining,
+    Icons.local_atm,
+    Icons.local_activity,
+    Icons.account_circle
+  ];
+
+  // list page title
+  List<String> _pageTitle = ["Money Manager", "Expenses", "Income", "Balance", "Profile"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Money Management"),
+        title: Text(_pageTitle[_currentIndex]),
         elevation: 0.0,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 16.0),
-            MonthMenu(),
-            SizedBox(height: 16.0),
-            OverallBox(),
-            SizedBox(height: 8.0),
-            OverAllListItem(),
-          ],
-        ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          SummaryPage(),
+          ExpensePage(),
+          IncomePage(),
+          BalancePage(),
+          ProfilePage(),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: () {}),
+      floatingActionButton: (_currentIndex == 0)
+          ? FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return AddItemPage();
+                    },
+                  ),
+                );
+              },
+            )
+          : Container(),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
@@ -55,11 +88,8 @@ class _HomePageState extends State<HomePage> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Dashboard"),
-          BottomNavigationBarItem(icon: Icon(Icons.local_dining), label: "Expenses"),
-          BottomNavigationBarItem(icon: Icon(Icons.local_atm), label: "Income"),
-          BottomNavigationBarItem(icon: Icon(Icons.local_activity), label: "Balance"),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Account")
+          for (int i = 0; i < 5; i++)
+            BottomNavigationBarItem(icon: Icon(_bottomMenuIcon[i]), label: _bottomMenuText[i]),
         ],
       ),
       drawer: Drawer(
