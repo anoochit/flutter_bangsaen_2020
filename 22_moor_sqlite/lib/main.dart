@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 hintText: 'Type your task here !!',
               ),
               onFieldSubmitted: (value) {
-                database.addTodo(Todo(id: null, title: "Hello"));
+                database.addTodo(Todo(id: null, title: value));
               },
             ),
           ],
