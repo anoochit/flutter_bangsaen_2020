@@ -69,8 +69,9 @@ class _HomePageState extends State<HomePage> {
                 // load to preference
                 loadData().then((value) {
                   log(value);
-                  name = value;
-                  setState(() {});
+                  setState(() {
+                    name = value;
+                  });
                 });
               }),
         ],
