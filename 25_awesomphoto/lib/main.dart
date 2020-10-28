@@ -77,18 +77,21 @@ class _HomePageState extends State<HomePage> {
         child: FutureBuilder(
           future: fetchAllAlbum(),
           builder: (BuildContext context, AsyncSnapshot<List<Album>> snapshot) {
-            return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(snapshot.data[index].title),
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                      return PhotoPage(albumId: snapshot.data[index].id);
-                    }));
-                  },
-                );
-              },
-            );
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Text(snapshot.data[index].title),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                        return PhotoPage(albumId: snapshot.data[index].id);
+                      }));
+                    },
+                  );
+                },
+              );
+            }
+            return CircularProgressIndicator();
           },
         ),
       ),
